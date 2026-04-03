@@ -19,6 +19,31 @@ function saveTasks() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
+function showValidationError(message) {
+  window.alert(message);
+}
+
+function validateTaskData(title, description, editingId = "") {
+  if (title.length < 3) {
+    return "El titulo debe tener al menos 3 caracteres.";
+  }
+
+  if (description.length < 10) {
+    return "La descripcion debe tener al menos 10 caracteres.";
+  }
+
+  const normalizedTitle = title.toLowerCase();
+  const exists = tasks.some((task) => {
+    return task.id !== editingId && task.title.toLowerCase() === normalizedTitle;
+  });
+
+  if (exists) {
+    return "Ya existe una tarea con ese titulo.";
+  }
+
+  return "";
+}
+
 function resetForm() {
   taskIdInput.value = "";
   taskForm.reset();
@@ -122,8 +147,15 @@ taskForm.addEventListener("submit", (event) => {
 
   const title = titleInput.value.trim();
   const description = descriptionInput.value.trim();
+  const validationError = validateTaskData(title, description, taskIdInput.value);
 
   if (!title || !description) {
+    showValidationError("Todos los campos son obligatorios.");
+    return;
+  }
+
+  if (validationError) {
+    showValidationError(validationError);
     return;
   }
 
