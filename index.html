@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRUD Funcional - Gestor de Tareas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Gestor de Tareas</h1>
+      <p>CRUD funcional en JavaScript con almacenamiento local.</p>
+    </header>
+
+    <section class="card">
+      <form id="taskForm" class="task-form">
+        <input type="hidden" id="taskId" />
+        <label for="taskTitle">Titulo</label>
+        <input id="taskTitle" name="taskTitle" type="text" placeholder="Ej: Preparar demo" required maxlength="80" />
+
+        <label for="taskDescription">Descripcion</label>
+        <textarea id="taskDescription" name="taskDescription" rows="3" placeholder="Detalles de la tarea" required maxlength="220"></textarea>
+
+        <div class="actions">
+          <button type="submit" id="saveBtn">Guardar</button>
+          <button type="button" id="cancelBtn" class="secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="toolbar">
+        <input type="search" id="searchInput" placeholder="Buscar por titulo o descripcion" />
+      </div>
+      <ul id="taskList" class="task-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
