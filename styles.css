@@ -1,0 +1,165 @@
+:root {
+  --bg: #f4efe7;
+  --panel: #fffdf9;
+  --ink: #182028;
+  --muted: #6c737c;
+  --accent: #d35400;
+  --accent-strong: #a84300;
+  --border: #eadfce;
+  --danger: #ad2e24;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(145deg, #f6efe2 0%, #efe7da 100%);
+  color: var(--ink);
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.app-header p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: 0 6px 20px rgba(24, 32, 40, 0.06);
+}
+
+.task-form {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #d9cab5;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fffcf7;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+button:hover {
+  background: var(--accent-strong);
+}
+
+button.secondary {
+  background: #d8d2c8;
+  color: #222;
+}
+
+.toolbar {
+  margin-bottom: 10px;
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.task-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+  background: #fff;
+}
+
+.task-item h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.task-item p {
+  margin: 0;
+  color: #3f4650;
+}
+
+.task-item .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.task-item small {
+  color: var(--muted);
+}
+
+.task-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.task-buttons .danger {
+  background: var(--danger);
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
