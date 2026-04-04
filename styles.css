@@ -95,7 +95,18 @@ button.secondary {
 }
 
 .toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   margin-bottom: 10px;
+}
+
+.toolbar input {
+  flex: 1;
+}
+
+.toolbar button {
+  white-space: nowrap;
 }
 
 .task-list {
@@ -165,6 +176,11 @@ button.secondary {
 }
 
 @media (max-width: 600px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .actions {
     flex-direction: column;
   }

@@ -7,6 +7,7 @@ const descriptionInput = document.getElementById("taskDescription");
 const cancelBtn = document.getElementById("cancelBtn");
 const taskList = document.getElementById("taskList");
 const searchInput = document.getElementById("searchInput");
+const exportBtn = document.getElementById("exportBtn");
 
 let tasks = loadTasks();
 
@@ -162,6 +163,17 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function exportTasksToJson() {
+  const data = JSON.stringify(tasks, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = "tareas-crud.json";
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -193,6 +205,10 @@ cancelBtn.addEventListener("click", () => {
 });
 
 searchInput.addEventListener("input", renderTaskList);
+
+exportBtn.addEventListener("click", () => {
+  exportTasksToJson();
+});
 
 taskList.addEventListener("click", (event) => {
   const target = event.target;
