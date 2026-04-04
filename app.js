@@ -50,6 +50,16 @@ function resetForm() {
   taskForm.reset();
 }
 
+function formatDate(value) {
+  const date = new Date(value);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
+
 function renderTaskList() {
   const query = searchInput.value.trim().toLowerCase();
   const filtered = tasks.filter((task) => {
@@ -70,7 +80,7 @@ function renderTaskList() {
         <li class="task-item ${task.completed ? "is-completed" : ""}">
           <div class="row">
             <h3>${escapeHtml(task.title)}</h3>
-            <small>${new Date(task.updatedAt).toLocaleString("es-CO")}</small>
+            <small>${formatDate(task.updatedAt)}</small>
           </div>
           <p>${escapeHtml(task.description)}</p>
           <small>Estado: ${task.completed ? "Completada" : "Pendiente"}</small>
