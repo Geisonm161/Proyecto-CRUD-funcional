@@ -125,6 +125,16 @@ button.secondary {
   color: #3f4650;
 }
 
+.task-item.is-completed {
+  background: #f4f9f2;
+  border-color: #c8dfbe;
+}
+
+.task-item.is-completed h3 {
+  text-decoration: line-through;
+  color: #52704a;
+}
+
 .task-item .row {
   display: flex;
   justify-content: space-between;

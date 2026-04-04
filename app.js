@@ -66,13 +66,15 @@ function renderTaskList() {
   taskList.innerHTML = filtered
     .map((task) => {
       return `
-        <li class="task-item">
+        <li class="task-item ${task.completed ? "is-completed" : ""}">
           <div class="row">
             <h3>${escapeHtml(task.title)}</h3>
             <small>${new Date(task.updatedAt).toLocaleString("es-CO")}</small>
           </div>
           <p>${escapeHtml(task.description)}</p>
+          <small>Estado: ${task.completed ? "Completada" : "Pendiente"}</small>
           <div class="task-buttons">
+            <button type="button" data-action="toggle" data-id="${task.id}">${task.completed ? "Reabrir" : "Completar"}</button>
             <button type="button" data-action="edit" data-id="${task.id}">Editar</button>
             <button type="button" class="danger" data-action="delete" data-id="${task.id}">Eliminar</button>
           </div>
@@ -88,6 +90,7 @@ function createTask(title, description) {
     id: crypto.randomUUID(),
     title,
     description,
+    completed: false,
     createdAt: now,
     updatedAt: now,
   };
@@ -107,6 +110,23 @@ function updateTask(id, title, description) {
       ...task,
       title,
       description,
+      updatedAt: new Date().toISOString(),
+    };
+  });
+
+  saveTasks();
+  renderTaskList();
+}
+
+function toggleTaskStatus(id) {
+  tasks = tasks.map((task) => {
+    if (task.id !== id) {
+      return task;
+    }
+
+    return {
+      ...task,
+      completed: !task.completed,
       updatedAt: new Date().toISOString(),
     };
   });
@@ -188,6 +208,11 @@ taskList.addEventListener("click", (event) => {
 
   if (action === "edit") {
     editTask(id);
+    return;
+  }
+
+  if (action === "toggle") {
+    toggleTaskStatus(id);
     return;
   }
 
